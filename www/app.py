@@ -12,15 +12,6 @@ from models import *
 import orm
 
 
-@get('/')
-async def index(request):
-    users = await User.findAll()
-    return {
-        '__template__':'test.html',
-        'users':users
-    }
-
-
 
 
 def init_jinja2(app, **kw):
