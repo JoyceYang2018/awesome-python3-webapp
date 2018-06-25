@@ -1,5 +1,5 @@
 #coding:utf-8
-from . import config_default
+import config_default, config_override
 
 
 class Dict(dict):
@@ -46,8 +46,7 @@ configs = config_default.configs
 
 
 try:
-    from . import config_override
-    configs = merge(configs,config_override.configs)
+    configs = merge(configs, config_override.configs)
 except ImportError:
     pass
 

@@ -7,13 +7,18 @@ from datetime import datetime
 from aiohttp import web
 from jinja2 import Environment,FileSystemLoader
 
+from coroweb import get, add_static,add_routes
+from models import *
 import orm
-from coroweb import add_routes,add_static
 
 
-
-def index(request):
-    return web.Response(body=b'<h1>Awesome</h1>',content_type='text/html')
+@get('/')
+async def index(request):
+    users = await User.findAll()
+    return {
+        '__template__':'test.html',
+        'users':users
+    }
 
 
 
@@ -115,23 +120,16 @@ def datetime_filter(t):
 
 
 async def init(loop):
+    await orm.create_pool(loop=loop,user='www-data',password='www-data',db='awesome')
     app=web.Application(loop=loop,middlewares=[
         logger_factory,response_factory
     ])
     init_jinja2(app,filters=dict(datetime=datetime_filter))
-    add_route(app,'handlers')
+    add_routes(app,'handlers')
     add_static(app)
-    app.router.add_route('GET','/',index)
     srv = await loop.create_server(app.make_handler(),'127.0.0.1',9000)
     logging.info('server started at http://127.0.0.1:9000...')
     return srv
-
-
-
-
-
-
-
 
 
 
