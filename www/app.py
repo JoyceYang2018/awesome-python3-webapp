@@ -114,7 +114,6 @@ async def auth_factory(app,handler):
 
 
 
-
 def datetime_filter(t):
     delta = int(time.time() - t)
     if delta < 60:
