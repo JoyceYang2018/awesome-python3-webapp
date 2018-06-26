@@ -14,7 +14,7 @@ class APIError(Exception):
 class APIValueError(APIError):
     #暗示输入值有错误或者无效，指出了输入表单的错误区域field
     def __init__(self,field,message=''):
-        super(APIValueError, self).__init__('value:invalid',field,massage)
+        super(APIValueError, self).__init__('value:invalid',field,message)
 
 
 class APIResourceNotFoundError(APIError):
