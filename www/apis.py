@@ -52,3 +52,9 @@ class Page(object):
 
 
     __repr__ = __str__
+
+
+
+if __name__ == '__main__':
+    import doctest
+    doctest.testmod()
