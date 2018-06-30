@@ -5,7 +5,9 @@ server {
     access_log /srv/awesome/log/access_log;
     error_log  /srv/awesome/log/error_log;
 
-    # server_name awesome.yang.com;
+    server_name 18.217.100.153;
+   #server_name  ec2-18-217-100-153.us-east-2.compute.amazonaws.com;
+
 
     client_max_body_size 1m;
 
